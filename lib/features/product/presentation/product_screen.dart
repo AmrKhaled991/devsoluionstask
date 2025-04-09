@@ -1,7 +1,7 @@
 import 'package:devsoluionstask/constent.dart';
 import 'package:devsoluionstask/core/utils/theme/App_assets.dart';
 import 'package:devsoluionstask/core/utils/theme/Styles.dart';
-import 'package:devsoluionstask/features/presentation/product/widgets/product_color_and_rating.dart';
+import 'package:devsoluionstask/features/product/presentation/widgets/product_color_and_rating.dart';
 import 'package:devsoluionstask/features/widgets/custom_elevated_button.dart';
 import 'package:devsoluionstask/features/widgets/custom_icon_background.dart';
 import 'package:flutter/material.dart';
