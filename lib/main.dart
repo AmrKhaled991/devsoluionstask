@@ -1,7 +1,11 @@
+import 'package:devsoluionstask/core/utils/helpers/getItLocator.dart';
 import 'package:devsoluionstask/features/home/presentation/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
+  setupGitItLocator();
+
   runApp(const MyApp());
 }
 
@@ -15,10 +19,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-     
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomeScreen(),
+      home: ProviderScope(child: HomeScreen()),
     );
   }
 }

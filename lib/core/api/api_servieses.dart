@@ -1,19 +1,15 @@
-
+import 'package:devsoluionstask/core/utils/helpers/parseProductList.dart';
+import 'package:devsoluionstask/features/home/data/models/product_response.dart';
 import 'package:dio/dio.dart';
 
-class ApiServess {
+class ApiServices {
   static const url = "https://fakestoreapi.com/products";
-  
 
-  ApiServess(this.dio);
+  ApiServices(this.dio);
   Dio dio;
 
-  // Future<Getallpackagesrepsonse> getavailableBundles() async {
-  //   dio.interceptors.add(PrettyDioLogger());
-  //   final response = await dio.get(availableBundles,
-        
-  //   final res = Getallpackagesrepsonse.fromJson(response.data);
-  //   return res;
-  // }
-
+  Future<List<ProductResponse>> getProducts() async {
+    final response = await dio.get(url);
+    return parseProductList(response.data);
+  }
 }
