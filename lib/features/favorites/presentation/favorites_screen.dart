@@ -1,4 +1,4 @@
-import 'package:devsoluionstask/features/presentation/favorites/widgets/favorite_product_card.dart';
+import 'package:devsoluionstask/features/favorites/presentation/widgets/favorite_product_card.dart';
 import 'package:devsoluionstask/features/widgets/search_and_notification_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(20),
-
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(

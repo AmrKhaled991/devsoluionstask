@@ -35,6 +35,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.17
+  dio:
 
 dev_dependencies:
 
