@@ -11,11 +11,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
-   Hive.registerAdapter(HiveProductAdapter());
+  Hive.registerAdapter(HiveProductAdapter());
 
-    Hive.registerAdapter(RatingAdapter());
+  Hive.registerAdapter(RatingAdapter());
   await Hive.openBox<HiveProduct>(BoxConstants.favoritesBox);
- 
 
   setupGitItLocator();
 
@@ -27,13 +26,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return SafeArea(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        home: ProviderScope(child: MainPage()),
       ),
-      home: ProviderScope(child: MainPage()),
     );
   }
 }

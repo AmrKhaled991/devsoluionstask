@@ -36,9 +36,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
             SliverToBoxAdapter(
               child: SearchAndNotificationBar(searchController: controller),
             ),
-            SliverFillRemaining(
-              child: ListOfFavoriteProducts(),
-            ),
+            SliverFillRemaining(child: ListOfFavoriteProducts()),
           ],
         ),
       ),
@@ -47,7 +45,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
 }
 
 class ListOfFavoriteProducts extends ConsumerStatefulWidget {
-  const ListOfFavoriteProducts({super.key, });
+  const ListOfFavoriteProducts({super.key});
 
   @override
   _ListOfFavoriteProductsState createState() => _ListOfFavoriteProductsState();
@@ -58,14 +56,13 @@ class _ListOfFavoriteProductsState
   @override
   Widget build(BuildContext context) {
     final data = ref.watch(favoritesProvider);
-    return ListView.separated(
-      itemBuilder:
-          (context, index) => FavoriteProductCard(
-            product: data[index],
-          
-          ),
-      separatorBuilder: (context, index) => const SizedBox(height: 20),
-      itemCount: data.length,
-    );
+    return data.isEmpty
+        ? const Center(child: Text('add favorite products'))
+        : ListView.separated(
+          itemBuilder:
+              (context, index) => FavoriteProductCard(product: data[index]),
+          separatorBuilder: (context, index) => const SizedBox(height: 20),
+          itemCount: data.length,
+        );
   }
 }

@@ -1,11 +1,10 @@
-import 'package:devsoluionstask/constent.dart';
-import 'package:devsoluionstask/core/utils/theme/App_assets.dart';
-import 'package:devsoluionstask/core/utils/theme/Styles.dart';
+import 'package:devsoluionstask/features/home/data/models/rating.dart';
+import 'package:devsoluionstask/features/product/presentation/widgets/rating_section.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ProductColorAndRating extends StatefulWidget {
-  const ProductColorAndRating({super.key});
+  final ProductRating rating;
+  const ProductColorAndRating({super.key, required this.rating});
 
   @override
   State<ProductColorAndRating> createState() => _ProductColorAndRatingState();
@@ -54,22 +53,7 @@ class _ProductColorAndRatingState extends State<ProductColorAndRating> {
           }),
         ),
 
-        Row(
-          children: [
-            SvgPicture.asset(Assets.imagesStare, height: 16, width: 16),
-            const SizedBox(width: 4),
-            Text(
-              '4.8',
-              style: Styles.textSemiBold18().copyWith(color: SECONDRY),
-            ),
-            Text(
-              '(231)',
-              style: Styles.textRegular12().copyWith(
-                color: const Color(0xFF909090),
-              ),
-            ),
-          ],
-        ),
+        RatingSection(rate: widget.rating.rate, count: widget.rating.count),
       ],
     );
   }

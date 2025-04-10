@@ -5,6 +5,7 @@ import 'package:devsoluionstask/core/utils/theme/Styles.dart';
 import 'package:devsoluionstask/features/favorites/presentation/notifier/favorite_products.dart';
 import 'package:devsoluionstask/features/favorites/presentation/notifier/fetch_favorite_produts_provider.dart';
 import 'package:devsoluionstask/features/product/presentation/product_screen.dart';
+import 'package:devsoluionstask/features/product/presentation/widgets/rating_section.dart';
 import 'package:devsoluionstask/features/widgets/custom_card.dart';
 import 'package:devsoluionstask/features/widgets/custom_icon_background.dart';
 import 'package:flutter/material.dart';
@@ -102,11 +103,7 @@ class _FavoriteProductCardState extends State<FavoriteProductCard> {
                     ),
                     const SizedBox(height: 12),
 
-                    Text(
-                      "stars",
-                      textAlign: TextAlign.right,
-                      style: Styles.textSemiBold12(),
-                    ),
+                   RatingSection(rate: widget.product.rating.rate, count: widget.product.rating.count),
                   ],
                 ),
               ),

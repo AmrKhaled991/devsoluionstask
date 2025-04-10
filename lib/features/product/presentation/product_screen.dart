@@ -73,7 +73,7 @@ class ProductScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            ProductColorAndRating(),
+            ProductColorAndRating(rating: product.rating),
             Divider(height: 40),
             CustomElevatedButton(
               buttonStyle: ButtonStyle(
