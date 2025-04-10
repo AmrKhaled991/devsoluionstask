@@ -1,5 +1,7 @@
 import 'package:devsoluionstask/core/utils/helpers/get_product_intite.dart';
-import 'package:devsoluionstask/features/favorites/presentation/notifier/fetch_produts_provider.dart';
+import 'package:devsoluionstask/core/utils/models/product.dart';
+import 'package:devsoluionstask/features/favorites/presentation/notifier/fetch_favorite_produts_provider.dart';
+import 'package:devsoluionstask/features/home/presentation/notifier/fetch_produts_provider.dart';
 import 'package:devsoluionstask/features/home/presentation/widgets/app_error_widget.dart';
 import 'package:devsoluionstask/features/home/presentation/widgets/product_card.dart';
 import 'package:devsoluionstask/features/home/presentation/widgets/products_loading.dart';
@@ -14,11 +16,24 @@ class HomeProducts extends ConsumerStatefulWidget {
 }
 
 class _HomeProductsState extends ConsumerState<HomeProducts> {
+  List<Product> favoriteProducts = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.microtask(
+      () async =>
+          favoriteProducts =
+              await ref
+                  .read(favoriteProductProvider.notifier)
+                  .favoriteProducts(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final watch = ref.watch(fetchProductsProvider);
-
-    return watch.when(
+    final watchFetchProductsProvider = ref.watch(fetchProductsProvider);
+    return watchFetchProductsProvider.when(
       data:
           (data) => GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
@@ -31,7 +46,12 @@ class _HomeProductsState extends ConsumerState<HomeProducts> {
             ),
             itemCount: data.length, // your item list
             itemBuilder: (context, index) {
-              return ProductCard(product: getProductIntite(data[index]));
+              return ProductCard(
+                product: getProductIntite(data[index]),
+                isFavorite: favoriteProducts.any(
+                  (element) => element.id == data[index].id,
+                ),
+              );
             },
           ),
       error:

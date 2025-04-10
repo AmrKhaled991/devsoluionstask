@@ -19,7 +19,7 @@ class ProductsLoading extends StatelessWidget {
       itemCount: 10, // your item list
       itemBuilder: (context, index) {
         return Skeletonizer(
-          child: ProductCard(product: getProductIntite(ProductResponse())),
+          child: ProductCard(product: getProductIntite(ProductResponse()),isFavorite: false,),
         );
       },
     );

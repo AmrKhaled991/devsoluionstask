@@ -1,3 +1,4 @@
+import 'package:devsoluionstask/core/utils/models/product.dart';
 import 'package:devsoluionstask/core/utils/theme/App_assets.dart';
 import 'package:devsoluionstask/core/utils/theme/Styles.dart';
 import 'package:devsoluionstask/features/widgets/custom_card.dart';
@@ -5,7 +6,8 @@ import 'package:devsoluionstask/features/widgets/custom_icon_background.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteProductCard extends StatelessWidget {
-  const FavoriteProductCard({super.key});
+  final Product product;
+  const FavoriteProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class FavoriteProductCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "product.name",
+                        product.title,
                         textAlign: TextAlign.right,
                         style: Styles.textSemiBold20(),
                       ),
@@ -44,7 +46,7 @@ class FavoriteProductCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    '${"product.pric"} ر.س',
+                    '${product.price}EGP',
                     textAlign: TextAlign.right,
                     style: Styles.textSemiBold14(),
                   ),

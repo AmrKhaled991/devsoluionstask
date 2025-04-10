@@ -1,3 +1,5 @@
+import 'package:devsoluionstask/features/home/data/models/rating.dart';
+
 class ProductResponse {
   final int? id;
   final String? title;
@@ -5,16 +7,16 @@ class ProductResponse {
   final String? description;
   final String? category;
   final String? image;
-  final Rating? rating;
+  final ProductRating? rating;
 
   ProductResponse({
-     this.id,
-     this.title,
-     this.price,
-     this.description,
-     this.category,
-     this.image,
-     this.rating,
+    this.id,
+    this.title,
+    this.price,
+    this.description,
+    this.category,
+    this.image,
+    this.rating,
   });
 
   factory ProductResponse.fromJson(Map<String, dynamic> json) {
@@ -25,7 +27,7 @@ class ProductResponse {
       description: json['description'],
       category: json['category'],
       image: json['image'],
-      rating: Rating.fromJson(json['rating']),
+      rating: ProductRating.fromJson(json['rating']),
     );
   }
 
@@ -39,20 +41,5 @@ class ProductResponse {
       'image': image,
       'rating': rating?.toJson(),
     };
-  }
-}
-
-class Rating {
-  final double rate;
-  final int count;
-
-  Rating({required this.rate, required this.count});
-
-  factory Rating.fromJson(Map<String, dynamic> json) {
-    return Rating(rate: (json['rate'] as num).toDouble(), count: json['count']);
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'rate': rate, 'count': count};
   }
 }

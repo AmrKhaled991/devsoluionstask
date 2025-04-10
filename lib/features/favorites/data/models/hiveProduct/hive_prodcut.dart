@@ -37,3 +37,14 @@ class HiveProduct extends HiveObject {
   });
 }
 
+@HiveType(typeId: 2)
+class Rating extends HiveObject {
+  // Add fields for Rating here, e.g.
+  @HiveField(0)
+  double rate;
+
+  @HiveField(1)
+  int count;
+
+  Rating({required this.rate, required this.count});
+}

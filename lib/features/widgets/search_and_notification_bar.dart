@@ -1,5 +1,7 @@
 import 'package:devsoluionstask/core/utils/theme/App_assets.dart';
 import 'package:devsoluionstask/core/utils/theme/Styles.dart';
+import 'package:devsoluionstask/features/favorites/presentation/favorites_screen.dart';
+import 'package:devsoluionstask/features/favorites/presentation/widgets/favorite_product_card.dart';
 import 'package:devsoluionstask/features/widgets/custom_icon_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -54,7 +56,14 @@ class SearchAndNotificationBar extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               CustomIconBackground(
-                onPress: () {},
+                onPress: () {
+                      Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FavoritesScreen(), // 👈 الصفحة اللي رايح لها
+              ),
+            );
+                },
                 image: Assets.imagesNotification,
               ),
               Positioned(
