@@ -1,5 +1,4 @@
 import 'package:devsoluionstask/features/favorites/data/models/hiveProduct/hive_prodcut.dart';
-import 'package:devsoluionstask/features/home/data/models/product_response.dart';
 import 'package:devsoluionstask/features/home/data/models/rating.dart';
 
 class Product {

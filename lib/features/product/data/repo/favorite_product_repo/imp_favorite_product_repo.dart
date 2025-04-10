@@ -10,7 +10,7 @@ class FavoriteProductRepoImp implements FavoriteProductRepo {
   Future<void> addRemoveProductToFavorite(Product product, bool isAdd) async {
     final favProduct = Hive.box<HiveProduct>(BoxConstants.favoritesBox);
 
-    if (!isAdd) {
+    if (isAdd) {
       Future.delayed(
         const Duration(milliseconds: 200),
       ).then((_) => favProduct.delete(product.id));
