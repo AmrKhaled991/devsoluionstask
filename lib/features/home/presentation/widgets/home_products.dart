@@ -1,5 +1,4 @@
 import 'package:devsoluionstask/core/utils/helpers/get_product_intite.dart';
-import 'package:devsoluionstask/core/utils/models/product.dart';
 import 'package:devsoluionstask/features/favorites/presentation/notifier/favorite_products.dart';
 import 'package:devsoluionstask/features/favorites/presentation/notifier/fetch_favorite_produts_provider.dart';
 import 'package:devsoluionstask/features/home/presentation/notifier/fetch_produts_provider.dart';

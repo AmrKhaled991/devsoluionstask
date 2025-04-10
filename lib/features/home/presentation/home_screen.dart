@@ -38,8 +38,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () async {
-                  // Refresh the data when pulled down
-                  ref.refresh(fetchProductsProvider);
+                  ref.read(refreshTriggerProvider.notifier).state++;
                 },
                 child: CustomScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
@@ -78,9 +77,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       ),
                     ),
-                    SliverToBoxAdapter(
-                      child: HomeProducts(), // يجب أن تكون هذه مصممة بشكل صحيح
-                    ),
+                    SliverToBoxAdapter(child: HomeProducts()),
                   ],
                 ),
               ),
