@@ -14,9 +14,7 @@ class FavProductsLoading extends StatelessWidget {
           (context, index) => Skeletonizer(
             child: FavoriteProductCard(
               product: getProductIntite(ProductResponse()),
-              onFavoriteIconTap: () {
-                
-              },
+             
             ),
           ),
       separatorBuilder: (context, index) => const SizedBox(height: 20),

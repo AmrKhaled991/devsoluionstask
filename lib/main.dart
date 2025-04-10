@@ -1,3 +1,4 @@
+import 'package:devsoluionstask/core/utils/constants/box_constants.dart';
 import 'package:devsoluionstask/core/utils/helpers/getItLocator.dart';
 import 'package:devsoluionstask/features/favorites/data/models/hiveProduct/hive_prodcut.dart';
 import 'package:devsoluionstask/features/widgets/MainPage.dart';
@@ -10,11 +11,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
-   Hive.registerAdapter(HiveProductAdapter());
+  Hive.registerAdapter(HiveProductAdapter());
 
-    Hive.registerAdapter(RatingAdapter());
-  await Hive.openBox<HiveProduct>('favoriteProduct');
- 
+  Hive.registerAdapter(RatingAdapter());
+  await Hive.openBox<HiveProduct>(BoxConstants.favoritesBox);
 
   setupGitItLocator();
 
@@ -26,13 +26,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return SafeArea(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        home: ProviderScope(child: MainPage()),
       ),
-      home: ProviderScope(child: MainPage()),
     );
   }
 }

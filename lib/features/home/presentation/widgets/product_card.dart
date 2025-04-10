@@ -3,7 +3,9 @@ import 'package:devsoluionstask/constent.dart';
 import 'package:devsoluionstask/core/utils/models/product.dart';
 import 'package:devsoluionstask/core/utils/theme/App_assets.dart';
 import 'package:devsoluionstask/core/utils/theme/Styles.dart';
+import 'package:devsoluionstask/features/favorites/presentation/notifier/favorite_products.dart';
 import 'package:devsoluionstask/features/favorites/presentation/notifier/fetch_favorite_produts_provider.dart';
+import 'package:devsoluionstask/features/home/presentation/notifier/fetch_produts_provider.dart';
 import 'package:devsoluionstask/features/product/presentation/product_screen.dart';
 import 'package:devsoluionstask/features/widgets/custom_icon_background.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +13,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductCard extends StatefulWidget {
-  final bool isFavorite;
   final Product product;
-  const ProductCard({
-    super.key,
-    required this.product,
-    required this.isFavorite,
-  });
+  const ProductCard({super.key, required this.product});
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -94,18 +91,24 @@ class _ProductCardState extends State<ProductCard> {
           ),
           Consumer(
             builder: (context, ref, child) {
-              final watch = ref.watch(addRemoveFavoriteProductProvider);
+             //for change screen state
+              ref.watch(addRemoveFavoriteProductProvider);
+             ref.watch(favoritesProvider);
+
               final read = ref.read(addRemoveFavoriteProductProvider.notifier);
+              final favoriteRead = ref.read(favoritesProvider.notifier);
+              
+              final isSelectedChange = favoriteRead.isFavorite(widget.product);
               return Positioned(
                 top: 6,
                 right: 6,
                 child: CustomIconBackground(
                   onPress: () {
-                    isSelectedChange = !(isSelectedChange ?? widget.isFavorite);
-                    read.addOrRemoveProduct(widget.product, isSelectedChange!);
+                    read.addOrRemoveProduct(widget.product, isSelectedChange);
+                    favoriteRead.addRemoveToFavorites(widget.product);
                   },
                   image:
-                      isSelectedChange ?? widget.isFavorite
+                      isSelectedChange
                           ? Assets.imagesSelectedHeart
                           : Assets.imagesPrimaryHeart,
                   backgroundColor: Colors.white,
