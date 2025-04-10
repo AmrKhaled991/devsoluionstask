@@ -1,8 +1,6 @@
-import 'package:devsoluionstask/core/utils/models/product.dart';
+import 'package:devsoluionstask/features/favorites/presentation/notifier/favorite_products.dart';
 import 'package:devsoluionstask/features/favorites/presentation/notifier/fetch_favorite_produts_provider.dart';
-import 'package:devsoluionstask/features/favorites/presentation/widgets/fav_products_loading.dart';
 import 'package:devsoluionstask/features/favorites/presentation/widgets/favorite_product_card.dart';
-import 'package:devsoluionstask/features/home/presentation/widgets/app_error_widget.dart';
 import 'package:devsoluionstask/features/widgets/search_and_notification_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,16 +37,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
               child: SearchAndNotificationBar(searchController: controller),
             ),
             SliverFillRemaining(
-              child: products.when(
-                data: (data) => ListOfFavoriteProducts(data: data),
-                error:
-                    (error, stackTrace) => AppError(
-                      error: error,
-                      tryAgain:
-                          () => ref.invalidate(fetchFavoriteProductsProvider),
-                    ),
-                loading: FavProductsLoading.new,
-              ),
+              child: ListOfFavoriteProducts(),
             ),
           ],
         ),
@@ -58,8 +47,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
 }
 
 class ListOfFavoriteProducts extends ConsumerStatefulWidget {
-  final List<Product> data;
-  const ListOfFavoriteProducts({super.key, required this.data});
+  const ListOfFavoriteProducts({super.key, });
 
   @override
   _ListOfFavoriteProductsState createState() => _ListOfFavoriteProductsState();
@@ -69,19 +57,15 @@ class _ListOfFavoriteProductsState
     extends ConsumerState<ListOfFavoriteProducts> {
   @override
   Widget build(BuildContext context) {
-    final watch = ref.watch(addRemoveFavoriteProductProvider);
-    final read = ref.read(addRemoveFavoriteProductProvider.notifier);
+    final data = ref.watch(favoritesProvider);
     return ListView.separated(
       itemBuilder:
           (context, index) => FavoriteProductCard(
-            product: widget.data[index],
-            onFavoriteIconTap: () {
-              read.addOrRemoveProduct(widget.data[index], true);
-              widget.data.remove(widget.data[index]);
-            },
+            product: data[index],
+          
           ),
       separatorBuilder: (context, index) => const SizedBox(height: 20),
-      itemCount: widget.data.length,
+      itemCount: data.length,
     );
   }
 }

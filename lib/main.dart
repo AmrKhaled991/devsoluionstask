@@ -1,3 +1,4 @@
+import 'package:devsoluionstask/core/utils/constants/box_constants.dart';
 import 'package:devsoluionstask/core/utils/helpers/getItLocator.dart';
 import 'package:devsoluionstask/features/favorites/data/models/hiveProduct/hive_prodcut.dart';
 import 'package:devsoluionstask/features/widgets/MainPage.dart';
@@ -13,7 +14,7 @@ void main() async {
    Hive.registerAdapter(HiveProductAdapter());
 
     Hive.registerAdapter(RatingAdapter());
-  await Hive.openBox<HiveProduct>('favoriteProduct');
+  await Hive.openBox<HiveProduct>(BoxConstants.favoritesBox);
  
 
   setupGitItLocator();

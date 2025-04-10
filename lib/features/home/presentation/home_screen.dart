@@ -19,8 +19,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -38,39 +38,36 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () async {
-                  return ref.invalidate(fetchProductsProvider);
+                  // Refresh the data when pulled down
+                  ref.refresh(fetchProductsProvider);
                 },
-                child: NestedScrollView(
-                  headerSliverBuilder:
-                      (context, innerBoxIsScrolled) => [
-                        SliverAppBar(
-                          backgroundColor: Colors.white,
-                          surfaceTintColor: Colors.transparent,
-                          automaticallyImplyLeading: false,
-                          expandedHeight: 200,
-                          floating: false,
-                          pinned: false,
-                          elevation: 0.0,
-                          flexibleSpace: FlexibleSpaceBar(
-                            collapseMode:
-                                CollapseMode
-                                    .parallax, // Smooth scrolling effect
-                            background: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8.0,
-                              ),
-                              child: Image.asset(Assets.imagesBanner),
-                            ),
-                          ),
+                child: CustomScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  slivers: [
+                    SliverAppBar(
+                      backgroundColor: Colors.white,
+                      surfaceTintColor: Colors.transparent,
+                      automaticallyImplyLeading: false,
+                      expandedHeight: 200,
+                      floating: false,
+                      pinned: false,
+                      elevation: 0.0,
+                      flexibleSpace: FlexibleSpaceBar(
+                        collapseMode: CollapseMode.parallax,
+                        background: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Image.asset(Assets.imagesBanner),
                         ),
-                      ],
-                  body: Column(
-                    children: [
-                      Padding(
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: HorizontalCategoryList(),
                       ),
-                      Padding(
+                    ),
+                    SliverToBoxAdapter(
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Align(
                           alignment: AlignmentDirectional.centerStart,
@@ -80,10 +77,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           ),
                         ),
                       ),
-
-                      Expanded(child: HomeProducts()),
-                    ],
-                  ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: HomeProducts(), // يجب أن تكون هذه مصممة بشكل صحيح
+                    ),
+                  ],
                 ),
               ),
             ),
