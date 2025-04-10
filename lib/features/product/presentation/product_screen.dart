@@ -3,10 +3,14 @@ import 'package:devsoluionstask/constent.dart';
 import 'package:devsoluionstask/core/utils/models/product.dart';
 import 'package:devsoluionstask/core/utils/theme/App_assets.dart';
 import 'package:devsoluionstask/core/utils/theme/Styles.dart';
+import 'package:devsoluionstask/features/favorites/presentation/notifier/favorite_products.dart';
+import 'package:devsoluionstask/features/favorites/presentation/notifier/fetch_favorite_produts_provider.dart';
 import 'package:devsoluionstask/features/product/presentation/widgets/product_color_and_rating.dart';
+import 'package:devsoluionstask/features/product/presentation/widgets/product_fav_button.dart';
 import 'package:devsoluionstask/features/widgets/custom_elevated_button.dart';
 import 'package:devsoluionstask/features/widgets/custom_icon_background.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -30,7 +34,7 @@ class ProductScreen extends StatelessWidget {
                   },
                 ),
                 Spacer(),
-                CustomIconBackground(image: Assets.imagesHeart, onPress: () {}),
+                ProductFavButton(product: product),
                 const SizedBox(width: 12),
                 CustomIconBackground(image: Assets.imagesShare, onPress: () {}),
               ],
