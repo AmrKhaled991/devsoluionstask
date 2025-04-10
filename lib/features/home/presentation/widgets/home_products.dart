@@ -23,10 +23,9 @@ class _HomeProductsState extends ConsumerState<HomeProducts> {
     super.initState();
     Future.microtask(
       () async =>
-          favoriteProducts =
-              await ref
-                  .read(favoriteProductProvider.notifier)
-                  .favoriteProducts(),
+          favoriteProducts = await ref.read(
+            fetchFavoriteProductsProvider.future,
+          ),
     );
   }
 

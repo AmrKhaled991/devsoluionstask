@@ -84,8 +84,8 @@ class _ProductCardState extends State<ProductCard> {
         ),
         Consumer(
           builder: (context, ref, child) {
-            final watch = ref.watch(favoriteProductProvider);
-            final read = ref.read(favoriteProductProvider.notifier);
+            final watch = ref.watch(addRemoveFavoriteProductProvider);
+            final read = ref.read(addRemoveFavoriteProductProvider.notifier);
             return Positioned(
               top: 6,
               right: 6,
