@@ -1,16 +1,28 @@
-# devsoluionstask
+:
 
-A new Flutter project.
+📱 Flutter App Overview
+This Flutter application was developed using Clean Architecture and the MVVM pattern. I utilized several useful packages to make the app efficient, clean, and maintainable.
 
-## Getting Started
+🧠 State Management
+Used Riverpod, as it's one of the most modern and powerful state management solutions available. It provides flexibility, scalability, and simplicity — perfect for the app's structure.
 
-This project is a starting point for a Flutter application.
+I avoided using BLoC because the app is relatively small and doesn't require complex state management.
 
-A few resources to get you started if this is your first Flutter project:
+📦 Package Choices
+Hive was chosen for local data storage due to its speed, ease of use, and familiarity.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+persistent_bottom_nav_bar was used to create a smooth, animated bottom navigation bar quickly and effectively.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+I avoided unnecessary packages like go_router since the app doesn't contain many screens, and basic navigation was sufficient.
+
+📹 Demo
+A complete walkthrough video is attached below, demonstrating the app’s functionality and explaining how everything works.
+
+Video
+https://drive.google.com/file/d/1TvxTR4UDELfoZA_uDCU1bds9l5PU2IbK/view?usp=sharing
+
+APK
+https://drive.google.com/file/d/1U2mSVw8Fgruz-4b8pykq0v8z6qHd9MCJ/view?usp=drive_link
+
+Directory
+https://drive.google.com/drive/folders/1wB-6QIa_OFLt7H6UtC2DrnlimvcH94j8?usp=drive_link
