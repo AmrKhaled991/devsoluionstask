@@ -10,6 +10,8 @@ class ProductsLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+       physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2, // 2 items per row
         mainAxisSpacing: 8, // spacing between rows
@@ -19,7 +21,7 @@ class ProductsLoading extends StatelessWidget {
       itemCount: 10, // your item list
       itemBuilder: (context, index) {
         return Skeletonizer(
-          child: ProductCard(product: getProductIntite(ProductResponse())),
+          child: ProductCard(product: getProductIntite(ProductResponse()),),
         );
       },
     );

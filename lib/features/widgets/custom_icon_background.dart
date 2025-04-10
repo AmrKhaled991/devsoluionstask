@@ -8,7 +8,6 @@ class CustomIconBackground extends StatelessWidget {
   final Color? backgroundColor;
   final Function() onPress;
 
-
   const CustomIconBackground({
     super.key,
     this.icon,
@@ -19,16 +18,22 @@ class CustomIconBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      maxRadius: 22,
-      backgroundColor:  backgroundColor ?? APPGRAY,
-      child:
-          image != null
-              ? InkWell(onTap: onPress, child: SvgPicture.asset(image!))
-              : IconButton(
-                icon: Icon(icon, color: Color(0xFF767676), size: 20),
-                onPressed: onPress,
-              ),
+    return InkWell(
+      onTap: onPress,
+      child: CircleAvatar(
+        maxRadius: 22,
+        backgroundColor: backgroundColor ?? APPGRAY,
+        child:
+            image != null
+                ? InkWell(
+                  onTap: onPress,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SvgPicture.asset(image!, width: 20),
+                  ),
+                )
+                : Icon(icon, color: Color(0xFF767676), size: 20),
+      ),
     );
   }
 }

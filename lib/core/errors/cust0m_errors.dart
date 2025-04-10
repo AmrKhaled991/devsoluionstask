@@ -25,7 +25,7 @@ class ServerError extends Failure {
       case DioExceptionType.cancel:
         return ServerError('sorry cancel requste,try again later');
       case DioExceptionType.connectionError:
-        return ServerError('sorry cancel connectionError,try again later');
+        return ServerError('Please check your internet connection');
       case DioExceptionType.unknown:
         if (dioException.message!.contains('SocketException')) {
           return ServerError('no internet conection');

@@ -1,5 +1,6 @@
 import 'package:devsoluionstask/features/favorites/data/models/hiveProduct/hive_prodcut.dart';
 import 'package:devsoluionstask/features/home/data/models/product_response.dart';
+import 'package:devsoluionstask/features/home/data/models/rating.dart';
 
 class Product {
   final int id;
@@ -8,7 +9,7 @@ class Product {
   final String description;
   final String category;
   final String image;
-  final Rating rating;
+  final ProductRating rating;
 
   Product({
     required this.id,
@@ -27,6 +28,6 @@ class Product {
     description: product.description,
     category: product.category,
     image: product.image,
-    rating: product.rating,
+    rating:  Rating(rate: product.rating.rate, count: product.rating.count),   
   );
 }

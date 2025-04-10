@@ -1,6 +1,6 @@
 import 'package:devsoluionstask/core/utils/theme/App_assets.dart';
 import 'package:devsoluionstask/core/utils/theme/Styles.dart';
-import 'package:devsoluionstask/features/favorites/presentation/notifier/fetch_produts_provider.dart';
+import 'package:devsoluionstask/features/home/presentation/notifier/fetch_produts_provider.dart';
 import 'package:devsoluionstask/features/home/presentation/widgets/home_products.dart';
 import 'package:devsoluionstask/features/home/presentation/widgets/horizontal_category_list.dart';
 import 'package:devsoluionstask/features/widgets/search_and_notification_bar.dart';
@@ -19,15 +19,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
+    return Container(
+      color: Colors.white,
+      child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
@@ -38,39 +38,35 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () async {
-                  return ref.invalidate(fetchProductsProvider);
+                  ref.read(refreshTriggerProvider.notifier).state++;
                 },
-                child: NestedScrollView(
-                  headerSliverBuilder:
-                      (context, innerBoxIsScrolled) => [
-                        SliverAppBar(
-                          backgroundColor: Colors.white,
-                          surfaceTintColor: Colors.transparent,
-                          automaticallyImplyLeading: false,
-                          expandedHeight: 200,
-                          floating: false,
-                          pinned: false,
-                          elevation: 0.0,
-                          flexibleSpace: FlexibleSpaceBar(
-                            collapseMode:
-                                CollapseMode
-                                    .parallax, // Smooth scrolling effect
-                            background: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8.0,
-                              ),
-                              child: Image.asset(Assets.imagesBanner),
-                            ),
-                          ),
+                child: CustomScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  slivers: [
+                    SliverAppBar(
+                      backgroundColor: Colors.white,
+                      surfaceTintColor: Colors.transparent,
+                      automaticallyImplyLeading: false,
+                      expandedHeight: 200,
+                      floating: false,
+                      pinned: false,
+                      elevation: 0.0,
+                      flexibleSpace: FlexibleSpaceBar(
+                        collapseMode: CollapseMode.parallax,
+                        background: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Image.asset(Assets.imagesBanner),
                         ),
-                      ],
-                  body: Column(
-                    children: [
-                      Padding(
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: HorizontalCategoryList(),
                       ),
-                      Padding(
+                    ),
+                    SliverToBoxAdapter(
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Align(
                           alignment: AlignmentDirectional.centerStart,
@@ -80,10 +76,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           ),
                         ),
                       ),
-
-                      Expanded(child: HomeProducts()),
-                    ],
-                  ),
+                    ),
+                    SliverToBoxAdapter(child: HomeProducts()),
+                  ],
                 ),
               ),
             ),

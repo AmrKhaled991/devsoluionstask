@@ -1,3 +1,5 @@
+import 'package:devsoluionstask/features/favorites/presentation/notifier/favorite_products.dart';
+import 'package:devsoluionstask/features/favorites/presentation/notifier/fetch_favorite_produts_provider.dart';
 import 'package:devsoluionstask/features/favorites/presentation/widgets/favorite_product_card.dart';
 import 'package:devsoluionstask/features/widgets/search_and_notification_bar.dart';
 import 'package:flutter/material.dart';
@@ -21,30 +23,46 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final products = ref.watch(fetchFavoriteProductsProvider);
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.all(16),
+      child: RefreshIndicator(
+        onRefresh: () async => ref.invalidate(fetchFavoriteProductsProvider),
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(20),
         child: CustomScrollView(
-                    physics: const NeverScrollableScrollPhysics(),
-
+          physics: const NeverScrollableScrollPhysics(),
           slivers: [
-           
             SliverToBoxAdapter(
               child: SearchAndNotificationBar(searchController: controller),
             ),
-            SliverFillRemaining(
-              child: ListView.separated(
-                itemBuilder: (context, index) => const FavoriteProductCard(),
-                separatorBuilder:
-                    (context, index) => const SizedBox(height: 20),
-                itemCount: 10,
-              ),
-            ),
+            SliverFillRemaining(child: ListOfFavoriteProducts()),
           ],
         ),
       ),
     );
+  }
+}
+
+class ListOfFavoriteProducts extends ConsumerStatefulWidget {
+  const ListOfFavoriteProducts({super.key});
+
+  @override
+  _ListOfFavoriteProductsState createState() => _ListOfFavoriteProductsState();
+}
+
+class _ListOfFavoriteProductsState
+    extends ConsumerState<ListOfFavoriteProducts> {
+  @override
+  Widget build(BuildContext context) {
+    final data = ref.watch(favoritesProvider);
+    return data.isEmpty
+        ? const Center(child: Text('add favorite products'))
+        : ListView.separated(
+          itemBuilder:
+              (context, index) => FavoriteProductCard(product: data[index]),
+          separatorBuilder: (context, index) => const SizedBox(height: 20),
+          itemCount: data.length,
+        );
   }
 }
