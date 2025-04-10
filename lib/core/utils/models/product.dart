@@ -1,3 +1,4 @@
+import 'package:devsoluionstask/features/favorites/data/models/hiveProduct/hive_prodcut.dart';
 import 'package:devsoluionstask/features/home/data/models/product_response.dart';
 
 class Product {
@@ -18,4 +19,14 @@ class Product {
     required this.image,
     required this.rating,
   });
+
+  HiveProduct productToHive(Product product) => HiveProduct(
+    id: product.id,
+    title: product.title,
+    price: product.price,
+    description: product.description,
+    category: product.category,
+    image: product.image,
+    rating: product.rating,
+  );
 }

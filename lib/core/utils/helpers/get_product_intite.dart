@@ -1,4 +1,4 @@
-import 'package:devsoluionstask/core/utils/dto/product.dart';
+import 'package:devsoluionstask/core/utils/models/product.dart';
 import 'package:devsoluionstask/features/home/data/models/product_response.dart';
 
 Product getProductIntite(ProductResponse productResponse) {
@@ -9,6 +9,10 @@ Product getProductIntite(ProductResponse productResponse) {
     description: productResponse.description ?? '',
     category: productResponse.category ?? '',
     image: productResponse.image ?? '',
-    rating: productResponse.rating ?? Rating(rate: 0, count: 0),
+    rating: productResponse.rating ?? 
+        Rating(
+          rate: 0,
+          count: 0,
+        ),  
   );
 }

@@ -16,7 +16,6 @@ class HomeProducts extends ConsumerStatefulWidget {
 class _HomeProductsState extends ConsumerState<HomeProducts> {
   @override
   Widget build(BuildContext context) {
-    print('--------');
     final watch = ref.watch(fetchProductsProvider);
 
     return watch.when(
