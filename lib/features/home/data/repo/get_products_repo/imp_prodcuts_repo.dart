@@ -13,8 +13,9 @@ class ImpProductsRepo extends ProductsRepo {
       var res = await remoteProductsRepo.getProducts();
       return res;
     } on Exception catch (e) {
+       
       if (e is DioException) {
-        throw ServerError(e.response!.data['message']);
+       throw e;
       }
       throw (ServerError('sorry for this error,please try again later'));
     }

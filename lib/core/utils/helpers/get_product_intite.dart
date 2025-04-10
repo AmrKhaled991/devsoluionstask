@@ -1,5 +1,8 @@
-import 'package:devsoluionstask/core/utils/dto/product.dart';
+import 'package:devsoluionstask/core/utils/models/product.dart';
+import 'package:devsoluionstask/features/favorites/data/models/hiveProduct/hive_prodcut.dart';
 import 'package:devsoluionstask/features/home/data/models/product_response.dart';
+
+import '../../../features/home/data/models/rating.dart';
 
 Product getProductIntite(ProductResponse productResponse) {
   return Product(
@@ -9,6 +12,6 @@ Product getProductIntite(ProductResponse productResponse) {
     description: productResponse.description ?? '',
     category: productResponse.category ?? '',
     image: productResponse.image ?? '',
-    rating: productResponse.rating ?? Rating(rate: 0, count: 0),
+    rating: productResponse.rating ?? ProductRating(rate: 0, count: 0) ,
   );
 }

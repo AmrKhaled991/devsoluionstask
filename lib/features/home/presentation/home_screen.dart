@@ -1,6 +1,6 @@
 import 'package:devsoluionstask/core/utils/theme/App_assets.dart';
 import 'package:devsoluionstask/core/utils/theme/Styles.dart';
-import 'package:devsoluionstask/features/favorites/presentation/notifier/fetch_produts_provider.dart';
+import 'package:devsoluionstask/features/home/presentation/notifier/fetch_produts_provider.dart';
 import 'package:devsoluionstask/features/home/presentation/widgets/home_products.dart';
 import 'package:devsoluionstask/features/home/presentation/widgets/horizontal_category_list.dart';
 import 'package:devsoluionstask/features/widgets/search_and_notification_bar.dart';
@@ -25,9 +25,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
+    return Container(
+      color: Colors.white,
+      child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [

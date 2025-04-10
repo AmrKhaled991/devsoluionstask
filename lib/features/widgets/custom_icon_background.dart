@@ -24,7 +24,9 @@ class CustomIconBackground extends StatelessWidget {
       backgroundColor:  backgroundColor ?? APPGRAY,
       child:
           image != null
-              ? InkWell(onTap: onPress, child: SvgPicture.asset(image!))
+              ? InkWell(onTap: onPress, child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: SvgPicture.asset(image!)))
               : IconButton(
                 icon: Icon(icon, color: Color(0xFF767676), size: 20),
                 onPressed: onPress,
