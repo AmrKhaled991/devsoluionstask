@@ -57,7 +57,6 @@ class CustomElevatedButton extends BaseButton {
         color: Colors.white,
       );
     }
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,

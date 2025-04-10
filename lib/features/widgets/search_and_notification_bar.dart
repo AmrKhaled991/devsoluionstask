@@ -55,14 +55,7 @@ class SearchAndNotificationBar extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               CustomIconBackground(
-                onPress: () {
-                      Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FavoritesScreen(), // 👈 الصفحة اللي رايح لها
-              ),
-            );
-                },
+                onPress: () {},
                 image: Assets.imagesNotification,
               ),
               Positioned(

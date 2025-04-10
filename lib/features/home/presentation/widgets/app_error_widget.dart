@@ -1,4 +1,10 @@
+import 'dart:io';
+import 'dart:math';
+
+import 'package:devsoluionstask/constent.dart';
+import 'package:devsoluionstask/core/errors/cust0m_errors.dart';
 import 'package:devsoluionstask/features/widgets/custom_elevated_button.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class AppError extends StatelessWidget {
@@ -6,12 +12,19 @@ class AppError extends StatelessWidget {
   final String? message;
   final VoidCallback? tryAgain;
 
-  const AppError({
-    super.key,
-    this.error,
-    this.message,
-    this.tryAgain,
-  });
+  const AppError({super.key, this.error, this.message, this.tryAgain});
+
+  String get _errorMessage {
+    if (error is DioException) {
+      return ServerError.fromDioError(error as DioException).message;
+    } else if (message != null) {
+      return message!;
+    } else if (error is SocketException) {
+      return "Please check your internet connection";
+    } else {
+      return 'Error happened';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +43,7 @@ class AppError extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               SelectableText(
-                message ?? error.toString(),
+                _errorMessage,
                 textAlign: TextAlign.center,
                 style: textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w500,
@@ -41,7 +54,10 @@ class AppError extends StatelessWidget {
                 CustomElevatedButton(
                   text: "Try Again",
                   onPressed: tryAgain,
-                )
+                  buttonStyle: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(PRIMARY),
+                  ),
+                ),
               ],
             ],
           ),
